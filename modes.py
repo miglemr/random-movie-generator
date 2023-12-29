@@ -12,7 +12,6 @@ def movies_mode(option: str, rating: float):
 
     api_call_error_message = "An error occured when calling API"
 
-    # Construct movie list object
     if option == "Random movie":
         try:
             movie_list = MoviesList(rating)
@@ -29,7 +28,6 @@ def movies_mode(option: str, rating: float):
             print(api_call_error_message)
             return
 
-    # Get movie from a list and print its details
     while True:
         try:
             movie_info = movie_list.get_movie()
@@ -39,7 +37,6 @@ def movies_mode(option: str, rating: float):
         movie = Movie(*movie_info.values())
         print(movie.get_details())
 
-        # Prompt user with menu
         while True:
             add_movie_options = ["Add to watchlist", "Skip", "Quit"]
             try:
@@ -50,7 +47,6 @@ def movies_mode(option: str, rating: float):
                 print(menu_error_message)
                 continue
 
-        # If user wants to add movie to watchlist check if it doesn't already exist and add it
         if add_movie_option == "Add to watchlist":
             id = str(movie.id)
             watchlist = Watchlist()
@@ -68,7 +64,6 @@ def movies_mode(option: str, rating: float):
 def watchlist_mode():
     """Function for getting user's watchlist"""
 
-    # Print user's watchlist, if empty - function returns false, in that case return to main menu
     while True:
         watchlist = Watchlist()
         movies = watchlist.get_watchlist()
@@ -78,7 +73,6 @@ def watchlist_mode():
             print("Watchlist is empty\n")
             break
 
-        # Prompt user to get more details on movie
         while True:
             try:
                 watchlist_options = ["Get movie details", "Quit"]
@@ -89,7 +83,6 @@ def watchlist_mode():
                 print(menu_error_message)
                 continue
 
-            # Print movie details and prompt user if they want to delete the movie
             if option == "Get movie details":
                 watchlist.get_movie_details()
                 while True:
